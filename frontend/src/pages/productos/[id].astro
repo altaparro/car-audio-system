@@ -1,0 +1,24 @@
+---
+import Layout from "../../layouts/Layout.astro";
+export const prerender = false;
+
+const { id } = Astro.params;
+
+const res = await fetch(`http://localhost:3000/api/productos/${id}/precios`);
+const data = await res.json();
+---
+<Layout>
+
+<h1>{data.producto}</h1>
+
+<p>Precio base: ${data.precio_base}</p>
+
+<ul>
+  {data.precios.map((p) => (
+    <li>
+      {p.tipo}: ${p.precio}
+    </li>
+  ))}
+</ul>
+
+</Layout>

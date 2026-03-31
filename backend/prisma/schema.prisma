@@ -6,3 +6,22 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Producto {
+  id          String   @id @default(uuid())
+  nombre      String
+  descripcion String?
+  marca       String?
+  categoria   String?
+  precio_base Float
+  stock       Int      @default(0)
+  activo      Boolean  @default(true)
+  creado_en   DateTime @default(now())
+}
+
+model TipoPago {
+  id                  String  @id @default(uuid())
+  nombre              String
+  recargo_porcentaje  Float
+  activo              Boolean @default(true)
+}
